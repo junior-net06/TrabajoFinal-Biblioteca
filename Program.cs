@@ -12,6 +12,8 @@ namespace TrabajoFinal_Biblioteca
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             Application.Run(new Form1());
+
+            //testing
         }
     }
 }

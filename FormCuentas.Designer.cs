@@ -28,22 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
-            tabControl1 = new TabControl();
+            Usuarios = new TabControl();
             tabPage1 = new TabPage();
             tabPage2 = new TabPage();
-            tabControl1.SuspendLayout();
+            Usuarios.SuspendLayout();
             SuspendLayout();
             // 
-            // tabControl1
+            // Usuarios
             // 
-            tabControl1.Controls.Add(tabPage1);
-            tabControl1.Controls.Add(tabPage2);
-            tabControl1.Dock = DockStyle.Fill;
-            tabControl1.Location = new Point(0, 0);
-            tabControl1.Name = "tabControl1";
-            tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(800, 450);
-            tabControl1.TabIndex = 0;
+            Usuarios.Controls.Add(tabPage1);
+            Usuarios.Controls.Add(tabPage2);
+            Usuarios.Dock = DockStyle.Fill;
+            Usuarios.Location = new Point(0, 0);
+            Usuarios.Name = "Usuarios";
+            Usuarios.SelectedIndex = 0;
+            Usuarios.Size = new Size(800, 450);
+            Usuarios.TabIndex = 0;
+            Usuarios.Tag = "";
             // 
             // tabPage1
             // 
@@ -70,16 +71,16 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(tabControl1);
+            Controls.Add(Usuarios);
             Name = "FormCuentas";
             Text = "FormCuentas";
-            tabControl1.ResumeLayout(false);
+            Usuarios.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
 
-        private TabControl tabControl1;
+        private TabControl Usuarios;
         private TabPage tabPage1;
         private TabPage tabPage2;
     }

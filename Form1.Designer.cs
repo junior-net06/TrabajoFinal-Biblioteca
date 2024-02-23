@@ -140,6 +140,7 @@
             textBoxLclave.Location = new Point(11, 140);
             textBoxLclave.Margin = new Padding(3, 4, 3, 4);
             textBoxLclave.Name = "textBoxLclave";
+            textBoxLclave.PasswordChar = '*';
             textBoxLclave.Size = new Size(361, 27);
             textBoxLclave.TabIndex = 3;
             // 

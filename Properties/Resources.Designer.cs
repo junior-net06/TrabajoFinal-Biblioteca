@@ -63,6 +63,16 @@ namespace TrabajoFinal_Biblioteca.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap left_pointing_magnifying_glass_1024x1024 {
+            get {
+                object obj = ResourceManager.GetObject("left-pointing-magnifying-glass.1024x1024", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap library_book_svgrepo_com {
             get {
                 object obj = ResourceManager.GetObject("library-book-svgrepo-com", resourceCulture);

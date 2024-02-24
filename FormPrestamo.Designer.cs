@@ -1,4 +1,5 @@
-﻿namespace TrabajoFinal_Biblioteca
+﻿
+namespace TrabajoFinal_Biblioteca
 {
     partial class FormPrestamo
     {
@@ -341,6 +342,11 @@
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ResumeLayout(false);
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

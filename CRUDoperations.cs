@@ -20,13 +20,32 @@ namespace TrabajoFinal_Biblioteca
         //Operaciones CRUD sobre tabla inventario de libros
         public DataTable GetAllLibros()
         {
-            string query = "SELECT * FROM InventarioLibros";
+            string query = "SELECT * FROM Libros";
             return dbManager.ExecuteQuery(query);
         }
 
+        public DataTable GetLibroByName(string nombre)
+        {
+            string query = $"SELECT * FROM Libros WHERE Titulos like '%{nombre}%'";
+            return dbManager.ExecuteQuery(query);
+        }
+
+        public DataTable GetLibroByAuthor(string autor)
+        {
+            string query = $"SELECT * FROM Libros WHERE Autor like '%{autor}%'";
+            return dbManager.ExecuteQuery(query);
+        }
+
+        public DataTable GetLibroByCode(string code)
+        {
+            string query = $"SELECT * FROM Libros WHERE ISBN = '{code}'";
+            return dbManager.ExecuteQuery(query);
+        }
+
+
         public int InsertLibro(string titulo, string autor, string editora, DateTime fechaPublicacion, string isbn)
         {
-            string query = $"INSERT INTO InventarioLibros (Titulos, Autor, Editora, Fecha_De_Publicacion, ISBN) " +
+            string query = $"INSERT INTO Libros (Titulos, Autor, Editora, Fecha_De_Publicacion, ISBN) " +
                            $"VALUES ('{titulo}', '{autor}', '{editora}', #{fechaPublicacion.ToShortDateString()}#, '{isbn}')";
             return dbManager.ExecuteNonQuery(query);
         }
@@ -84,20 +103,20 @@ namespace TrabajoFinal_Biblioteca
         //operaciones CRUD sobre tabla estudiantes
         public DataTable GetAllEstudiantes()
         {
-            string query = "SELECT * FROM VentanaAdministrarEstudiantes";
+            string query = "SELECT * FROM Estuadiantes";
             return dbManager.ExecuteQuery(query);
         }
 
         public int InsertEstudiante(string nombre, string apellido, string direccion, string matricula)
         {
-            string query = $"INSERT INTO VentanaAdministrarEstudiantes (Nombre, Apellido, Direccion, Matricula) " +
+            string query = $"INSERT INTO Estuadiantes (Nombre, Apellido, Direccion, Matricula) " +
                            $"VALUES ('{nombre}', '{apellido}', '{direccion}', '{matricula}')";
             return dbManager.ExecuteNonQuery(query);
         }
 
         public int UpdateEstudiante(int idEstudiante, string nombre, string apellido, string direccion, string matricula)
         {
-            string query = $"UPDATE VentanaAdministrarEstudiantes SET Nombre='{nombre}', Apellido='{apellido}', " +
+            string query = $"UPDATE Estuadiantes SET Nombre='{nombre}', Apellido='{apellido}', " +
                            $"Direccion='{direccion}', Matricula='{matricula}' " +
                            $"WHERE Id_estudiantes={idEstudiante}";
             return dbManager.ExecuteNonQuery(query);
@@ -105,34 +124,45 @@ namespace TrabajoFinal_Biblioteca
 
         public int DeleteEstudiante(int idEstudiante)
         {
-            string query = $"DELETE FROM VentanaAdministrarEstudiantes WHERE Id_estudiantes={idEstudiante}";
+            string query = $"DELETE FROM Estuadiantes WHERE Id_estudiantes={idEstudiante}";
             return dbManager.ExecuteNonQuery(query);
         }
 
         //Operaciones CRUD sobre tabla prestamos
         public DataTable GetAllPrestamos()
         {
-            string query = "SELECT * FROM VentanaPrestamoLibros";
+            string query = "SELECT * FROM Prestamo";
             return dbManager.ExecuteQuery(query);
         }
 
         public int InsertPrestamo(int idLibro, int idEstudiante, DateTime fechaSalida, DateTime fechaDevolucion)
         {
-            string query = $"INSERT INTO VentanaPrestamoLibros (Id_libro, Id_estudiantes, Fecha_Salida, Fecha_devolucion, Retraso, Devuelto) " +
-                           $"VALUES ({idLibro}, {idEstudiante}, #{fechaSalida.ToShortDateString()}#, #{fechaDevolucion.ToShortDateString()}#, No, No)";
+            /*string query = $"INSERT INTO Prestamo (Id_libro, Id_estudiantes, Fecha_Salida, Fecha_devolucion) " +
+                           //$"VALUES ({idLibro}, {idEstudiante}, #{fechaSalida.ToShortDateString()}#, #{fechaDevolucion.ToShortDateString()})";
+                           $"VALUES ({idLibro}, {idEstudiante}, #{fechaSalida.ToOADate()}#, #{fechaDevolucion.ToOADate()}#)";
             return dbManager.ExecuteNonQuery(query);
+            */
+            string fechaSalidaFormateada = fechaSalida.ToString("yyyy-MM-dd HH:mm:ss");
+            string fechaDevolucionFormateada = fechaDevolucion.ToString("yyyy-MM-dd HH:mm:ss");
+
+            string query = $"INSERT INTO Prestamo (Id_libro, id_estudiante, Fecha_Salida, Fecha_devolucion) " +
+                           $"VALUES ({idLibro}, {idEstudiante}, #{fechaSalidaFormateada}#, #{fechaDevolucionFormateada}#)";
+
+            return dbManager.ExecuteNonQuery(query);
+
+
         }
 
         public int UpdatePrestamo(int idPrestamo, bool devuelto)
         {
-            string query = $"UPDATE VentanaPrestamoLibros SET Devuelto={(devuelto ? "Si" : "No")} " +
+            string query = $"UPDATE Prestamo SET Devuelto={(devuelto ? "Si" : "No")} " +
                            $"WHERE Id_prestamo={idPrestamo}";
             return dbManager.ExecuteNonQuery(query);
         }
 
         public int DeletePrestamo(int idPrestamo)
         {
-            string query = $"DELETE FROM VentanaPrestamoLibros WHERE Id_prestamo={idPrestamo}";
+            string query = $"DELETE FROM Prestamo WHERE Id_prestamo={idPrestamo}";
             return dbManager.ExecuteNonQuery(query);
         }
 

@@ -9,6 +9,7 @@ namespace TrabajoFinal_Biblioteca
             InitializeComponent();
         }
 
+        //boton aceptar, este hace un query a la tabla de usuarios utilizando el valor cuenta tomado del textbox cuenta, luego valida que el password en tel textbox sea igual al valor del registro pass del usuairo
         private void button1_Click(object sender, EventArgs e)
         {
             CRUDoperations usuarios = new CRUDoperations();
@@ -41,6 +42,7 @@ namespace TrabajoFinal_Biblioteca
 
         }
 
+        //boton cancelar, pregunta si desea cerrar el programa
         private void button2_Click(object sender, EventArgs e)
         {
             DialogResult resultado = MessageBox.Show("¿Seguro que desea salir de esta aplicacion?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);

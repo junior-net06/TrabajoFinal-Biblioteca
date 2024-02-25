@@ -20,9 +20,11 @@ namespace TrabajoFinal_Biblioteca
             radioButton1.Checked = true;
         }
 
+        //declara e inicializa las variable que contendran los id de los libros y estudiantes
         public int id_libro = 0;
         public int id_estudiante = 0;
 
+        //Boton para buscar los libros con un query like, el query ejecutado sera en funcion al radiobutton seleccionado
         private void button1_Click(object sender, EventArgs e)
         {
 
@@ -122,6 +124,7 @@ namespace TrabajoFinal_Biblioteca
 
         }
 
+        //Carga los datos de la tabla estudiante en un combobox y los filtra por matricula, luego carga los datos del datagridview1
         private void FormPrestamo_Load(object sender, EventArgs e)
         {
             CRUDoperations estudiantes = new CRUDoperations();
@@ -133,6 +136,7 @@ namespace TrabajoFinal_Biblioteca
             load_datagrid();
         }
 
+        //funcion que carga los datos en el datagridview1
         private void load_datagrid()
         {
             CRUDoperations prestamo = new CRUDoperations();
@@ -141,7 +145,7 @@ namespace TrabajoFinal_Biblioteca
 
         }
 
-
+        //boton que realiza la insersion de los datos en la tabla prestamo utilizando los valores cargados en introducidos en el form, tambien realiza las validaciones adecuadas.
         private void button2_Click(object sender, EventArgs e)
         {
             load_datagrid();
@@ -149,7 +153,7 @@ namespace TrabajoFinal_Biblioteca
             DateTime fecha_salida = DateTime.Now;
             DateTime fecha_devolucion = fecha_salida.AddDays(days);
 
-            
+            //valida que la informacion concerniente al id del libro este seleccionada en el comboBox1
             if (comboBox1.SelectedIndex != -1)
             {
                 DataRowView selectedRow = comboBox1.SelectedItem as DataRowView;
@@ -160,6 +164,7 @@ namespace TrabajoFinal_Biblioteca
                 }
             }
 
+            //valida que la informacion concerniente al id del estudiante este seleccionada en el comboBox2
             if (comboBox2.SelectedIndex != -1)
             {
                 DataRowView selectedRow = comboBox2.SelectedItem as DataRowView;
@@ -174,6 +179,7 @@ namespace TrabajoFinal_Biblioteca
             label5.Text = id_libro.ToString();
             label6.Text = id_estudiante.ToString();
 
+            //valida que la fecha de entrega no sea un fin de semana y si lo es, muestra la informacion pertinente en un label
             if (fecha_devolucion.DayOfWeek == DayOfWeek.Saturday || fecha_devolucion.DayOfWeek == DayOfWeek.Sunday)
             {
                 label4.Visible = true;
@@ -188,7 +194,7 @@ namespace TrabajoFinal_Biblioteca
 
             }
 
-
+            //valida que el valor de la variable id_libro contenga algun valor antes proceder a insertar los datos en la BD
             if (id_libro > 0)
             {
                 

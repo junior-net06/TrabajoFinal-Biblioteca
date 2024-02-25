@@ -45,22 +45,22 @@ namespace TrabajoFinal_Biblioteca
 
         public int InsertLibro(string titulo, string autor, string editora, DateTime fechaPublicacion, string isbn)
         {
-            string query = $"INSERT INTO Libros (Titulos, Autor, Editora, Fecha_De_Publicacion, ISBN) " +
+            string query = $"INSERT INTO Libros (Titulos, Autor, Editora, Fecha_Publicacion, ISBN) " +
                            $"VALUES ('{titulo}', '{autor}', '{editora}', #{fechaPublicacion.ToShortDateString()}#, '{isbn}')";
             return dbManager.ExecuteNonQuery(query);
         }
 
         public int UpdateLibro(int idLibro, string titulo, string autor, string editora, DateTime fechaPublicacion, string isbn)
         {
-            string query = $"UPDATE InventarioLibros SET Titulos='{titulo}', Autor='{autor}', Editora='{editora}', " +
-                           $"Fecha_De_Publicacion=#{fechaPublicacion.ToShortDateString()}#, ISBN='{isbn}' " +
+            string query = $"UPDATE Libros SET Titulos='{titulo}', Autor='{autor}', Editora='{editora}', " +
+                           $"Fecha_Publicacion=#{fechaPublicacion.ToShortDateString()}#, ISBN='{isbn}' " +
                            $"WHERE Id_libros={idLibro}";
             return dbManager.ExecuteNonQuery(query);
         }
 
         public int DeleteLibro(int idLibro)
         {
-            string query = $"DELETE FROM InventarioLibros WHERE Id_libros={idLibro}";
+            string query = $"DELETE FROM Libros WHERE Id_libros={idLibro}";
             return dbManager.ExecuteNonQuery(query);
         }
 
@@ -90,13 +90,13 @@ namespace TrabajoFinal_Biblioteca
         public int UpdateUsuario(int idUsuario, string nombre, string cuenta, string pass)
         {
             string query = $"UPDATE Usuarios SET Nombre='{nombre}', Cuenta='{cuenta}', Pass='{pass}' " +
-                           $"WHERE Id_usuario={idUsuario}";
+                           $"WHERE Id_usuarios={idUsuario}";
             return dbManager.ExecuteNonQuery(query);
         }
 
         public int DeleteUsuario(int idUsuario)
         {
-            string query = $"DELETE FROM Usuarios WHERE Id_usuario={idUsuario}";
+            string query = $"DELETE FROM Usuarios WHERE Id_usuarios={idUsuario}";
             return dbManager.ExecuteNonQuery(query);
         }
 
@@ -106,6 +106,13 @@ namespace TrabajoFinal_Biblioteca
             string query = "SELECT * FROM Estuadiantes";
             return dbManager.ExecuteQuery(query);
         }
+
+        public DataTable GetEstudiante(string matricula)
+        {
+            string query = $"SELECT * FROM Estuadiantes WHERE matricula = '{matricula}'";
+            return dbManager.ExecuteQuery(query);
+        }
+
 
         public int InsertEstudiante(string nombre, string apellido, string direccion, string matricula)
         {
@@ -137,11 +144,6 @@ namespace TrabajoFinal_Biblioteca
 
         public int InsertPrestamo(int idLibro, int idEstudiante, DateTime fechaSalida, DateTime fechaDevolucion)
         {
-            /*string query = $"INSERT INTO Prestamo (Id_libro, Id_estudiantes, Fecha_Salida, Fecha_devolucion) " +
-                           //$"VALUES ({idLibro}, {idEstudiante}, #{fechaSalida.ToShortDateString()}#, #{fechaDevolucion.ToShortDateString()})";
-                           $"VALUES ({idLibro}, {idEstudiante}, #{fechaSalida.ToOADate()}#, #{fechaDevolucion.ToOADate()}#)";
-            return dbManager.ExecuteNonQuery(query);
-            */
             string fechaSalidaFormateada = fechaSalida.ToString("yyyy-MM-dd HH:mm:ss");
             string fechaDevolucionFormateada = fechaDevolucion.ToString("yyyy-MM-dd HH:mm:ss");
 
@@ -149,8 +151,6 @@ namespace TrabajoFinal_Biblioteca
                            $"VALUES ({idLibro}, {idEstudiante}, #{fechaSalidaFormateada}#, #{fechaDevolucionFormateada}#)";
 
             return dbManager.ExecuteNonQuery(query);
-
-
         }
 
         public int UpdatePrestamo(int idPrestamo, bool devuelto)
